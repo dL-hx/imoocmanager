@@ -43,43 +43,43 @@ const menuList = [
     },
     {
         title: '表单',
-        key: '/form',
+        key: '/admin/form',
         children: [
             {
                 title: '登录',
-                key: '/form/login',
+                key: '/admin/form/login',
             },
             {
                 title: '注册',
-                key: '/form/reg',
+                key: '/admin/form/reg',
             }
         ]
     },
     {
         title: '表格',
-        key: '/table',
+        key: '/admin/table',
         children: [
             {
                 title: '基础表格',
-                key: '/table/basic',
+                key: '/admin/table/basic',
             },
             {
                 title: '高级表格',
-                key: '/table/high',
+                key: '/admin/table/high',
             }
         ]
     },
     {
         title: '富文本',
-        key: '/rich'
+        key: '/admin/rich'
     },
     {
         title: '城市管理',
-        key: '/city'
+        key: '/admin/city'
     },
     {
         title: '订单管理',
-        key: '/order',
+        key: '/admin/order',
         btnList: [
             {
                 title: '订单详情',
@@ -93,33 +93,33 @@ const menuList = [
     },
     {
         title: '员工管理',
-        key: '/user'
+        key: '/admin/user'
     },
     {
         title: '车辆地图',
-        key: '/bikeMap'
+        key: '/admin/bikeMap'
     },
     {
         title: '图标',
-        key: '/charts',
+        key: '/admin/charts',
         children: [
             {
                 title: '柱形图',
-                key: '/charts/bar'
+                key: '/admin/charts/bar'
             },
             {
                 title: '饼图',
-                key: '/charts/pie'
+                key: '/admin/charts/pie'
             },
             {
                 title: '折线图',
-                key: '/charts/line'
+                key: '/admin/charts/line'
             },
         ]
     },
     {
         title: '权限设置',
-        key: '/permission'
+        key: '/admin/permission'
     },
 ];
 export default menuList;

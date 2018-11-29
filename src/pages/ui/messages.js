@@ -1,12 +1,13 @@
 //src\pages\ui\messages.js
 import React from "react";
 import "./ui.less";
-import { Card, Button, message} from "antd";
+import {Card, Button, message} from "antd";
 
 export default class Messages extends React.Component {
   showMeassage = type => {
     message[type]("恭喜你，React课程晋级成功.");
   };
+
   render() {
     return (
       <div>
