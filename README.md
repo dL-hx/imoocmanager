@@ -10,7 +10,4 @@
 
 ![](http://ww1.sinaimg.cn/large/006pJUwqly1fxoysfqnrmj31fz0op767.jpg)
 
-![](http://ww1.sinaimg.cn/large/006pJUwqly1fxoytzuad4j31ga0oz0ug.jpg)
-
-
-
+![](http://ww1.sinaimg.cn/large/006pJUwqly1fxoyvco1rsj31ga0oz0ug.jpg)
