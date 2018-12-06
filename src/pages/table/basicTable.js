@@ -1,9 +1,12 @@
 //src/pages/table/basicTable.js
 import React from 'react';
 import {Card, Table} from 'antd'
+import axios from './../../axios/index';
 
 export default class BasicTable extends React.Component {
-  state={};
+  state={
+    dataSource2:[]
+  };
   componentDidMount() {
     //定义数据源
     const data = [
@@ -42,8 +45,27 @@ export default class BasicTable extends React.Component {
     this.setState({
       dataSource:data
     });
+
+    this.request();//初始化调用数据
   }
 
+  // 动态获取mock数据
+  request=()=>{
+   axios.ajax({
+     url:'/table/list1',
+     data:{
+       params:{
+         page:1
+       }
+     }
+   }).then((res)=>{
+     if(res.code==0){
+       this.setState({
+         dataSource2:res.result
+       });
+     }
+   })
+  };
   render() {
     /*title:'id',       展示表头显示内容显示id
       dataIndex:'id'    返回的索引值
@@ -94,9 +116,15 @@ export default class BasicTable extends React.Component {
             columns={columns}
             dataSource={this.state.dataSource}
             pagination={false}
-          >
-
-          </Table>
+          />
+        </Card>
+        <Card title="动态数据渲染表格" style={{margin:'10px 0'}}>
+          <Table
+            bordered
+            columns={columns}
+            dataSource={this.state.dataSource2}
+            pagination={false}
+          />
         </Card>
       </div>
     );
