@@ -56,13 +56,16 @@ export default class BasicTable extends React.Component {
      data:{
        params:{
          page:1
-       }
+       },
+       // //  增加下方代码,则不会Loading
+       // isShowLoading:false
      }
    }).then((res)=>{
      if(res.code==0){
        this.setState({
          dataSource2:res.result
        });
+
      }
    })
   };

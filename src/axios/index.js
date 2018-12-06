@@ -24,26 +24,35 @@ export default class Axios {
   }
 
   static ajax(options) {//封装axios   定义为ajax请求,使用Promise
+    let loading;
+    if(options.data && options.data.isShowLoading !== false){
+      loading = document.getElementById('ajaxLoading');
+      loading.style.display = 'block';
+    }
     const baseApi = 'https://easy-mock.com/mock/5c0893b83b84ee1919884836/mock.api';
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
       axios({
-        url:options.url,
-        method:'get',
-        baseURL:baseApi,
-        timeout:5000,
+        url: options.url,
+        method: 'get',
+        baseURL: baseApi,
+        timeout: 5000,
         params: (options.data && options.data.params) || ''
-      }).then((response)=>{
-        if (response.status == '200'){
+      }).then((response) => {
+        if(options.data && options.data.isShowLoading !== false){
+          loading = document.getElementById('ajaxLoading');
+          loading.style.display = 'none';
+        }
+        if (response.status == '200') {
           let res = response.data;
-          if (res.code == '0'){
-            resolve(res) ;
-          }else{
+          if (res.code == '0') {
+            resolve(res);
+          } else {
             Modal.info({
-              title:"提示",
-              content:res.msg
+              title: "提示",
+              content: res.msg
             })
           }
-        }else{
+        } else {
           reject(response.data);
         }
       })

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--public/index.html-->
   <head>
     <meta charset="utf-8">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
@@ -26,6 +27,13 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
+    <div class="ajax-loading" id="ajaxLoading" style="display: none;">
+      <div class="overlay"></div>
+      <div class="loading">
+        <img src="https://media.number-7.cn/ebike-h5/static/images/common/loading.gif" alt="">
+        <span>加载中，请稍后...</span>
+      </div>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
