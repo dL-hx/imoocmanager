@@ -1,6 +1,6 @@
 //src/pages/table/basicTable.js
 import React from 'react';
-import {Card, Table} from 'antd'
+import {Card, Table,Modal} from 'antd'
 import axios from './../../axios/index';
 
 export default class BasicTable extends React.Component {
@@ -42,6 +42,10 @@ export default class BasicTable extends React.Component {
         time: '09:00'
       }
     ];
+    //动态添加key
+    data.map((item,index)=>{
+      item.key = index;
+    });
     //将数据存入state中保存
     this.setState({
       dataSource: data
@@ -63,11 +67,26 @@ export default class BasicTable extends React.Component {
       }
     }).then((res) => {
       if (res.code == 0) {
+        res.result.map((item,index)=>{
+           item.key = index
+        });
         this.setState({
           dataSource2: res.result
         });
 
       }
+    })
+  };
+
+  onRowClick = (record,index)=>{
+    let selectKey = [index];
+    Modal.info({
+      title:'信息',
+      content:`用户名:${record.userName},用户爱好:${record.interest}`
+    });
+    this.setState({
+      selectedRowKeys:selectKey,
+      selectedItem:record
     })
   };
 
@@ -136,6 +155,11 @@ export default class BasicTable extends React.Component {
         dataIndex: 'time'
       }
     ];
+    const selectedRowKeys = this.state.selectedRowKeys;
+    const rowSelection = {
+      type:'radio',
+      selectedRowKeys
+    };
     //bordered    配置边框
     //不显示分页     去掉分页
     // +   pagination={false}
@@ -149,9 +173,25 @@ export default class BasicTable extends React.Component {
             pagination={false}
           />
         </Card>
-        <Card title="动态数据渲染表格" style={{margin: '10px 0'}}>
+        <Card title="动态数据渲染表格-Mock" style={{margin: '10px 0'}}>
           <Table
             bordered
+            columns={columns}
+            dataSource={this.state.dataSource2}
+            pagination={false}
+          />
+        </Card>
+        <Card title="Mock-单选" style={{margin: '10px 0'}}>
+          <Table
+            bordered
+            rowSelection={rowSelection}
+            onRow={(record,index) => {
+              return {
+                onClick: ()=>{
+                  this.onRowClick(record,index);
+                }
+              };
+            }}
             columns={columns}
             dataSource={this.state.dataSource2}
             pagination={false}
