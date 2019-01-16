@@ -6,13 +6,10 @@ import * as serviceWorker from './serviceWorker';
 import Life from './pages/demo/Life';
 import Admin from './admin';
 import Router from './router'//全局引入Router文件
-ReactDOM.render(<Router />, document.getElementById('root'));
-
-
+ReactDOM.render(<Router/>, document.getElementById('root'));
 
 // import Home from './pages/route_demo/router1/Home';
 // ReactDOM.render(<Home />, document.getElementById('root'));
-
 
 
 // import Router from './pages/route_demo/router2/router';

@@ -73,7 +73,7 @@ export default class BasicTable extends React.Component {
     }).then((res) => {
       if (res.code == 0) {
         res.result.list.map((item,index)=>{
-           item.key = index
+          item.key = index
         });
         this.setState({//页面刷新,不保留选中字段
           dataSource2: res.result.list,
@@ -82,7 +82,7 @@ export default class BasicTable extends React.Component {
           pagination:Utils.pagination(res,(current)=>{
             //@todo
             _this.params.page = current;
-            _this.request();
+            this.request();
           })
         });
 
@@ -262,4 +262,3 @@ export default class BasicTable extends React.Component {
     );
   }
 }
-
