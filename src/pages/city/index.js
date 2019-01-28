@@ -1,6 +1,6 @@
 // src/pages/city/index.js
 import React from 'react';
-import {Card, Table, Form, Modal, Button, message, Input, Icon, Select,} from 'antd';
+import {Card, Table, Form, Modal, Button, message, Select,} from 'antd';
 import axios from './../../axios/index';
 import Utils from './../../utils/utils';
 
@@ -56,7 +56,23 @@ export default class City extends React.Component {
 
   // 城市开通提交
   handleSubmit = () => {
+    let cityInfo = this.cityForm.props.form.getFieldsValue();
+    console.log(cityInfo);
+    axios.ajax({
+      url: '/city/open',
+      data: {
+        params: cityInfo
+      }
+    }).then((res) => {
+      if (res.code == 0) {
+        message.success('开通成功');
+        this.setState({
+          isShowOpenCity:false
+        });
 
+        this.requestList();
+      }
+    });
   };
 
   render() {
@@ -92,7 +108,8 @@ export default class City extends React.Component {
         }
       }, {
         title: '城市开通时间',
-        dataIndex: 'open_time'
+        dataIndex: 'open_time',
+        render:Utils.formateDate
       }, {
         title: '操作时间',
         dataIndex: 'update_time',
@@ -129,7 +146,9 @@ export default class City extends React.Component {
 
           onOk={this.handleSubmit}
         >
-          <OpenCityForm/>
+          <OpenCityForm wrappedComponentRef={(inst) => {
+            this.cityForm = inst;
+          }}/>
         </Modal>
       </div>
     );
@@ -143,7 +162,6 @@ class FilterForm extends React.Component {
   render() {
     const {getFieldDecorator} = this.props.form;
     return (
-      <Form>
         <Form layout="inline">
           <FormItem label="城市">
             {
@@ -208,7 +226,6 @@ class FilterForm extends React.Component {
             <Button>重置</Button>
           </FormItem>
         </Form>
-      </Form>
     );
   }
 }
@@ -225,29 +242,47 @@ class OpenCityForm extends React.Component {
         span: 19
       }
     };
+    const {getFieldDecorator} = this.props.form;
     return (
       <Form layout="horizontal">
         <FormItem label="选择城市"  {...formItemLayout}>
-
-          <Select style={{width: 100}}>
-            <Option value="">全部</Option>
-            <Option value="1">北京市</Option>
-            <Option value="2">天津市</Option>
-          </Select>
+          {
+            getFieldDecorator('city_id', {
+              initialValue: '1'
+            })(
+              <Select style={{width: 100}}>
+                <Option value="">全部</Option>
+                <Option value="1">北京市</Option>
+                <Option value="2">天津市</Option>
+              </Select>
+            )
+          }
         </FormItem>
         <FormItem label="营运模式"  {...formItemLayout}>
-          <Select>
-            <Option value="1">自营</Option>
-            <Option value="2">加盟</Option>
-          </Select>
+          {
+            getFieldDecorator('op_mode', {
+              initialValue: '1'
+            })(
+              <Select style={{width: 100}}>
+                <Option value="1">自营</Option>
+                <Option value="2">加盟</Option>
+              </Select>
+            )
+          }
+
         </FormItem>
         <FormItem label="用车模式"  {...formItemLayout}>
-          <Select>
-            <Option value="1">指定停车点</Option>
-            <Option value="2">禁停区</Option>
-          </Select>
+          {
+            getFieldDecorator('use_mode', {
+              initialValue: '1'
+            })(
+              <Select style={{width: 100}}>
+                <Option value="1">指定停车点</Option>
+                <Option value="2">禁停区</Option>
+              </Select>
+            )
+          }
         </FormItem>
-
       </Form>
     );
   }
