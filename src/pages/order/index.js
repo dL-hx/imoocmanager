@@ -68,7 +68,7 @@ export default class Order extends React.Component {
         if (res.code == 0) {
           this.setState({
             orderInfo: res.result,
-            orderConfirmVisble: true
+            orderConfirmVisble: true,
           });
         }
       }
@@ -110,6 +110,19 @@ export default class Order extends React.Component {
       selectedRowKeys: selectedRowKeys,
       selectedItem: record
     });
+  };
+
+  openOrderDetail = () => {
+    let item = this.state.selectedItem;
+    if (!item) {
+      Modal.info({
+        title: '信息',
+        content: '请先选择一条订单'
+      });
+      return;
+    }
+    // 通过window.open 进行路由的跳转
+    window.open('/#/common/order/detail/' + item.id,'_blank')
   };
 
   render() {
@@ -184,7 +197,7 @@ export default class Order extends React.Component {
         </Card>
 
         <Card style={{marginTop: 10}}>
-          <Button type="primary">订单详情</Button>
+          <Button type="primary" onClick={this.openOrderDetail}>订单详情</Button>
           <Button type="primary" style={{marginLeft: 20}} onClick={this.handleConfirm}>结束详情</Button>
         </Card>
 
