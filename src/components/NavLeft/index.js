@@ -1,7 +1,7 @@
 import React from "react";
 import MenuConfig from "./../../config/menuConfig"; //导入menuConfig这个文件
-import { Menu, Icon } from "antd"; //导入子组件菜单
-import { NavLink } from "react-router-dom";
+import {Menu, Icon} from "antd"; //导入子组件菜单
+import {NavLink} from "react-router-dom";
 import "./index.less";
 
 const SubMenu = Menu.SubMenu;
@@ -46,7 +46,7 @@ export default class NavLeft extends React.Component {
     return (
       <div>
         <div className="logo">
-          <img src="/assets/logo-ant.svg" alt=" " />
+          <img src="/assets/logo-ant.svg" alt=" "/>
           <h1>Imooc MS</h1>
         </div>
         <Menu theme="dark">{this.state.menuTreeNode}</Menu>

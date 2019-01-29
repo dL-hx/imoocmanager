@@ -82,7 +82,7 @@ export default class BasicTable extends React.Component {
           pagination:Utils.pagination(res,(current)=>{
             //@todo
             _this.params.page = current;
-            this.request();
+            _this.request();
           })
         });
 
