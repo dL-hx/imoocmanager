@@ -3,9 +3,9 @@ import React from 'react';
 import {Card, Table, Form, Modal, Button, message, Select, DatePicker,} from 'antd';
 import axios from './../../axios/index';
 import Utils from './../../utils/utils';
+import BaseForm from '../../components/BaseForm';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 export default class Order extends React.Component {
   state = {
@@ -17,9 +17,45 @@ export default class Order extends React.Component {
     page: 1
   };
 
+  formList = [
+    {
+      type: 'SELECT',
+      label: '城市',
+      field:'city',
+      placeholder:'全部',
+      initialValue:'1',
+      width:80,
+      list:[{id:'0',name:'全部'},{id:'1',name:'北京'},{id:'2',name:'天津'},{id:'3',name:'上海'}]
+    },
+/*    {
+      type: 'INPUT',
+      label: '模式',
+      field:'mode',
+      placeholder:'请输入模式',
+      width:100,
+    },*/
+    {
+      type: '时间查询',
+    },
+    {
+      type: 'SELECT',
+      label: '订单状态',
+      field:'order_status',
+      placeholder:'全部',
+      initialValue:'1',
+      width:100,
+      list:[{id:'0',name:'全部'},{id:'1',name:'进行中'},{id:'2',name:'结束行程'}]
+    },
+  ];
+
   componentDidMount() {
     this.requestList();
   }
+
+  handleFilter = (params) => {
+    this.params = params; // 从子组件传来的值赋值给 params
+    this.requestList();
+  };
 
   // 默认请求我们的接口数据
   requestList = () => {
@@ -27,9 +63,7 @@ export default class Order extends React.Component {
     axios.ajax({
       url: '/order/list',
       data: {
-        params: {
-          page: this.params.page
-        }
+        params: this.params
       }
     }).then((res) => {
       let list = res.result.item_list.map((item, index) => {
@@ -194,10 +228,10 @@ export default class Order extends React.Component {
     return (
       <div>
         <Card>
-          <FilterForm/>
+          <BaseForm formList={this.formList} filterSubmit={this.handleFilter}/>
         </Card>
 
-        <Card style={{marginTop: 10}}>
+        <Card style={{marginTop: 10}} >
           <Button type="primary" onClick={this.openOrderDetail}>订单详情</Button>
           <Button type="primary" style={{marginLeft: 20}} onClick={this.handleConfirm}>结束详情</Button>
         </Card>
@@ -236,81 +270,6 @@ export default class Order extends React.Component {
     );
   }
 }
-
-//子组件一：选择表单
-class FilterForm extends React.Component {
-  render() {
-
-
-    const {getFieldDecorator} = this.props.form;
-    return (
-      <Form layout="inline">
-        <FormItem label="城市">
-          {
-            getFieldDecorator('city_id')(
-              <Select
-                style={{width: 100}}
-                placeholder="全部"
-              >
-                <Option value="">全部</Option>
-                <Option value="1">北京</Option>
-                <Option value="2">天津</Option>
-                <Option value="3">深圳</Option>
-              </Select>
-            )
-          }
-        </FormItem>
-
-        <FormItem label="订单时间">
-          {
-            getFieldDecorator('start_time')(
-              <DatePicker
-                placeholder="请选择开始时间"
-                showTime
-                format="YYYY-MM-DD HH:mm:ss"
-              />
-            )
-          }
-        </FormItem>
-
-        <FormItem>
-          {
-            getFieldDecorator('end_time')(
-              <DatePicker
-                placeholder="请选择结束时间"
-                showTime
-                format="YYYY-MM-DD HH:mm:ss"
-              />
-            )
-          }
-        </FormItem>
-
-
-        <FormItem label="订单状态">
-          {
-            getFieldDecorator('order_status')(
-              <Select
-                style={{width: 150}}
-                placeholder="全部"
-              >
-                <Option value="">全部</Option>
-                <Option value="1">进行中</Option>
-                <Option value="2">行程结束</Option>
-              </Select>
-            )
-          }
-        </FormItem>
-
-        <FormItem>
-          <Button type="primary" style={{margin: '0 20px'}}>查询</Button>
-          <Button>重置</Button>
-        </FormItem>
-      </Form>
-    );
-  }
-}
-
-FilterForm = Form.create({})(FilterForm);
 
 
 //子组件二：开通城市
