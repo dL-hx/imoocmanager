@@ -1,4 +1,8 @@
 //src/utils/utils.js
+import React from 'react';
+import {Select} from 'antd';
+const Option = Select.Option;
+
 export default {
     formateDate(time) {
         if (!time) return '';
@@ -22,5 +26,20 @@ export default {
             showQuickJumper:true
         };
         return page;
+    },
+
+    // 封装Option 外层接收data
+    getOptionList(data){
+        if (!data) {
+          return []
+        }
+        let options = [];//[<Option value="0" key="all_key">全部</Option>]
+
+        data.map((item) => {
+            //在options 中添加option 对象
+            options.push(<Option value={item.id} key={item.id}>{item.name}</Option>)
+        });
+
+        return options;
     }
 }

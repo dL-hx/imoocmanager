@@ -59,8 +59,8 @@ export default class Order extends React.Component {
 
   // 默认请求我们的接口数据
   requestList = () => {
-    let _this = this;
-    axios.ajax({
+    axios.requestList(this, '/order/list',this.params,true)
+/*    axios.ajax({
       url: '/order/list',
       data: {
         params: this.params
@@ -77,7 +77,7 @@ export default class Order extends React.Component {
           _this.requestList();
         })
       });
-    });
+    });*/
   };
 
   // 订单结束确认
