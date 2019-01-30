@@ -1,6 +1,6 @@
 // src/pages/order/index.js
 import React from 'react';
-import {Card, Table, Form, Modal, Button, message, Input, Icon, Select, DatePicker,} from 'antd';
+import {Card, Table, Form, Modal, Button, message, Select, DatePicker,} from 'antd';
 import axios from './../../axios/index';
 import Utils from './../../utils/utils';
 
@@ -9,7 +9,7 @@ const Option = Select.Option;
 
 export default class Order extends React.Component {
   state = {
-    orderInfo:{},
+    orderInfo: {},
     orderConfirmVisble: false
   };
 
@@ -112,6 +112,7 @@ export default class Order extends React.Component {
     });
   };
 
+  // 订单详情页
   openOrderDetail = () => {
     let item = this.state.selectedItem;
     if (!item) {
@@ -122,7 +123,7 @@ export default class Order extends React.Component {
       return;
     }
     // 通过window.open 进行路由的跳转
-    window.open('/#/common/order/detail/' + item.id,'_blank')
+    window.open('/#/common/order/detail/' + item.id, '_blank');
   };
 
   render() {
@@ -317,7 +318,7 @@ FilterForm = Form.create({})(FilterForm);
 class OpenCityForm extends React.Component {
   render() {
     // console.log(this.props); // => {form: {…}, id: 27296, bike_sn: "800116116", battery: 100, start_time: "1972-07-26 03:08:22", …}
-    const {bike_sn, battery,start_time,location} = this.props;
+    const {bike_sn, battery, start_time, location} = this.props;
     const formItemLayout = {
       labelCol: {
         span: 5
