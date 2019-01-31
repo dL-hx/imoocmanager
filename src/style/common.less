@@ -1,23 +1,22 @@
 // @colorA:'red';
-
 // div{
 //     color:@colorA
 // } 
 @import "./default.less";
-@import "./loading.less";//导入loading.less文件
+@import "./loading.less"; //导入loading.less文件
 
 // 清除li 标签前面的点点
-ul,li{
+ul, li {
   list-style: none;
 }
 
 // 清除左右浮动
-.clearfix{
-  &:after{
-    content:" ";
-    clear:both;
-    display:block;
-    visibility:hidden;
+.clearfix {
+  &:after {
+    content: " ";
+    clear: both;
+    display: block;
+    visibility: hidden;
   }
 }
 
@@ -30,22 +29,25 @@ ul,li{
     background-color: #001529;
     // background-color:red;
   }
+
   .main {
     height: calc(100vh);
     background-color: @colorL;
-    overflow:auto;
+    overflow: auto;
   }
+
   .content {
     position: relative;
     padding: 20px;
   }
 }
 
-.content-wrap{
+.content-wrap {
   background: #ffffff;
   border: 1px solid #e8e8e8;
   margin-top: -3px;
-  .ant-table-wrapper{
+
+  .ant-table-wrapper {
     margin-left: -1px;
     margin-right: -2px;
   }

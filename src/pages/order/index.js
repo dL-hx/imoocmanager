@@ -4,6 +4,7 @@ import {Card, Table, Form, Modal, Button, message, Select, DatePicker,} from 'an
 import axios from './../../axios/index';
 import Utils from './../../utils/utils';
 import BaseForm from '../../components/BaseForm';
+import ETable from "../../components/ETable"
 
 const FormItem = Form.Item;
 
@@ -130,7 +131,7 @@ export default class Order extends React.Component {
     });
   };
 
-  onRowClick = (record, index) => {
+/*  onRowClick = (record, index) => {
     let selectKey = [index];
     this.setState({
       selectedRowKeys: selectKey,
@@ -144,7 +145,7 @@ export default class Order extends React.Component {
       selectedRowKeys: selectedRowKeys,
       selectedItem: record
     });
-  };
+  };*/
 
   // 订单详情页
   openOrderDetail = () => {
@@ -161,13 +162,13 @@ export default class Order extends React.Component {
   };
 
   render() {
-    const selectedRowKeys = this.state.selectedRowKeys;
+ /*   const selectedRowKeys = this.state.selectedRowKeys;
 
     const rowSelection = {
       type: 'radio',
       selectedRowKeys,
       onChange: this.onSelectChange
-    };
+    };*/
 
 
     const columns = [{
@@ -237,6 +238,17 @@ export default class Order extends React.Component {
         </Card>
 
         <div className="content-wrap">
+          <ETable
+            columns={columns}
+            updateSelectedItem={Utils.updateSelectedItem.bind(this)}
+            selectedRowKeys={this.state.selectedRowKeys}
+            //selectedIds={this.state.selectedIds}
+            selectedItem={this.state.selectedItem}
+            dataSource={this.state.list}
+            pagination={this.state.pagination}
+          />
+        </div>
+ {/*       <div className="content-wrap">
           <Table
             bordered
             columns={columns}
@@ -252,7 +264,7 @@ export default class Order extends React.Component {
               };
             }}
           />
-        </div>
+        </div>*/}
         <Modal
           title="结束订单"
           visible={this.state.orderConfirmVisble}

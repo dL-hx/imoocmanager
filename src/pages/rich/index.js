@@ -5,34 +5,35 @@ import {Editor} from 'react-draft-wysiwyg'
 import draftjs from 'draftjs-to-html'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
-export default class RichText extends React.Component{
+export default class RichText extends React.Component {
   state = {
     showRichText: false,
     editorContent: '',
     editorState: ''
-  };
+  }
   handleClearContent = () => {  //清空文本
     this.setState({
       editorState: ''
     })
-  };
+  }
   handleGetText = () => {    //获取文本内容
     this.setState({
       showRichText: true
     })
-  };
+  }
   onEditorStateChange = (editorState) => {   //编辑器的状态
     this.setState({
       editorState
     })
-  };
+  }
   onEditorChange = (editorContent) => {   //编辑器内容的状态
     this.setState({
       editorContent
     })
-  };
-  render(){
-    const { editorState, editorContent } = this.state;
+  }
+
+  render() {
+    const {editorState, editorContent} = this.state
     return (
       <div>
         <Card>
@@ -52,7 +53,7 @@ export default class RichText extends React.Component{
         <Modal
           title="富文本"
           visible={this.state.showRichText}
-          onCancel={() =>{
+          onCancel={() => {
             this.setState({
               showRichText: false
             })
