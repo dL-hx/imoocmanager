@@ -1,6 +1,6 @@
 // src/components/BaseForm/index.js
 import React from 'react';
-import {Input, Select, Form, Button, Checkbox, Radio,DatePicker} from "antd";
+import {Input, Select, Form, Button, Checkbox, Radio, DatePicker} from "antd";
 import Utils from '../../utils/utils';
 
 const FormItem = Form.Item;
@@ -28,7 +28,24 @@ class FilterForm extends React.Component {
         let placeholder = item.placeholder;
         let width = item.width;
 
-        if (item.type == '时间查询') {
+        if (item.type == '城市') {
+          const city = <FormItem label="城市" key={field}>
+            {
+              getFieldDecorator('city',{
+                initialValue:'0'
+              })(
+                <Select
+                  style={{width: 80}}
+                  placeholder={placeholder}
+                >
+                  {Utils.getOptionList([{id:'0',name:'全部'},{id:'1',name:'北京'},{id:'2',name:'上海'},{id:'3',name:'天津'},{id:'4',name:'杭州'}])}
+                </Select>
+              )
+            }
+          </FormItem>;
+          formItemList.push(city);
+
+        } else if (item.type == '时间查询') {
           const begin_time = <FormItem label="订单时间" key={field}>
             {
               getFieldDecorator('begin_time')(
@@ -54,7 +71,7 @@ class FilterForm extends React.Component {
               getFieldDecorator([field], {
                 initialValue: initialValue
               })(
-                <Input type='text' style={{ width:width }} placeholder={placeholder}/>
+                <Input type='text' style={{width: width}} placeholder={placeholder}/>
               )
             }
           </FormItem>;
@@ -90,7 +107,7 @@ class FilterForm extends React.Component {
             }
           </FormItem>;
           formItemList.push(CHECKBOX);
-        }else if (item.type == 'DATE') {
+        } else if (item.type == 'DATE') {
           const Date = <FormItem label={label} key={field}>
             {
               getFieldDecorator([field])(

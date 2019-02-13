@@ -118,6 +118,7 @@ export default class User extends React.Component {
             if (res.code == 0) {
               _this.setState({
                 isVisible: false,
+                // selectedRowKeys:'' // 点击删除,单选框失去焦点:  空: null ''   参考网址https://blog.csdn.net/oscar999/article/details/9353713
               });
               _this.requestList();
             }
@@ -141,6 +142,7 @@ export default class User extends React.Component {
         this.userForm.props.form.resetFields();
         this.setState({
           isVisible: false,
+          // selectedRowKeys:'' // 查询完后,单选框失去焦点
         });
         this.requestList();
       }
