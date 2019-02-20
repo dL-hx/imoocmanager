@@ -6,6 +6,7 @@ import {Modal} from "antd";
 import Utils from "../utils/utils";
 //导出一个对象供其他对象进行使用
 export default class Axios {
+  // _this: this ,url:接口的url, params:需要传递到接口的数据, isMock:是否为Mock数据
   // 定义方法,为请求的列表使用
   static requestList(_this, url, params,isMock){
     var data = {
