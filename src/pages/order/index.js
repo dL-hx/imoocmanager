@@ -176,7 +176,8 @@ export default class Order extends React.Component {
       dataIndex: 'order_sn'
     }, {
       title: '车辆编号',
-      dataIndex: 'bike_sn'
+      dataIndex: 'bike_sn',
+      width: 100,
     }, {
       title: '用户名',
       dataIndex: 'user_name'

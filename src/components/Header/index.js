@@ -8,15 +8,14 @@ import {Row, Col} from "antd";
 import './index.less'
 import Util from '../../utils/utils'//导入公共机制
 import axios from "../../axios";//引入axios组件
-
-export default class Header extends React.Component {
+import {connect} from 'react-redux'  //连接器
+class Header extends React.Component {
     //声明 state变量 在setState之前要声明变量
     state = {};
 
-
-    componentWillMount() {
+    componentWillMount() {        
         this.setState({
-            userName: '太阳王子'
+            userName: '太阳王子',
         });
         /*
         创建定时器,每隔一秒获取时间
@@ -82,7 +81,8 @@ export default class Header extends React.Component {
                 {
                     menuType?'':<Row className="breadcrumb">
                         <Col span="4" className="breadcrumb-title">
-                            首页
+                            {/* 首页 */}
+                            {this.props.menuName}
                         </Col>
                         <Col span="20" className="weather">
                             <span className="date">{this.state.sysTime}</span>
@@ -100,3 +100,10 @@ export default class Header extends React.Component {
         );
     }
 }
+//将state.menuName 绑定到 props 的menuName
+const mapStateToProps = state => {
+    return {
+        menuName: state.menuName
+    }
+};
+export default connect(mapStateToProps)(Header)　

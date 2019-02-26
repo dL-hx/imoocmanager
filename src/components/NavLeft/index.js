@@ -1,11 +1,29 @@
 import React from "react";
 import MenuConfig from "./../../config/menuConfig"; //导入menuConfig这个文件
-import {Menu, Icon} from "antd"; //导入子组件菜单
-import {NavLink} from "react-router-dom";
+import { Menu, Icon } from "antd"; //导入子组件菜单
+import { NavLink } from "react-router-dom";
 import "./index.less";
+import { connect } from "react-redux"; // 连接器
+import { switchMenu } from "./../../redux/action"; //事件行为
 
 const SubMenu = Menu.SubMenu;
-export default class NavLeft extends React.Component {
+class NavLeft extends React.Component {
+  state = {
+    currentKey: ""
+  };
+  handleClick = ({ item, key }) => {
+    // console.log(item)
+    if (key === this.state.currentKey) {
+      return false;
+    }
+    // 事件派发，自动调用reducer，通过reducer保存到store对象中
+    const { dispatch } = this.props;
+    dispatch(switchMenu(item.props.title));
+    this.setState({
+      currentKey: key
+    });
+  };
+
   /*
    * 获取到对象后,可以通过setState将对象存进去 ,这是React的一个特色
    * */
@@ -13,9 +31,10 @@ export default class NavLeft extends React.Component {
     //通过MenuConfig读取文件
     //通过递归(遍历)实现菜单(是一个List)的渲染
     const menuTreeNode = this.renderMenu(MenuConfig);
-
+    let currentKey = window.location.hash.replace(/#|\?.*$/g, "");
     //通过setState存入state
     this.setState({
+      currentKey,
       menuTreeNode
     });
   }
@@ -46,11 +65,18 @@ export default class NavLeft extends React.Component {
     return (
       <div>
         <div className="logo">
-          <img src="/assets/logo-ant.svg" alt=" "/>
+          <img src="/assets/logo-ant.svg" alt=" " />
           <h1>Imooc MS</h1>
         </div>
-        <Menu theme="dark">{this.state.menuTreeNode}</Menu>
+        <Menu
+          onClick={this.handleClick}
+          selectedKeys={[this.state.currentKey]}
+          theme="dark"
+        >
+          {this.state.menuTreeNode}
+        </Menu>
       </div>
     );
   }
 }
+export default connect()(NavLeft);
