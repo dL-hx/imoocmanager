@@ -5,11 +5,14 @@ const Option = Select.Option;
 
 export default {
     formateDate(time) {
-        if (!time) return '';
+        function checkTime(time){
+          return time<10?"0"+time:time
+        }
+      if (!time) return '';
         let date = new Date(time);
-        return date.getFullYear() + '-' + (date.getMonth() + 1) +
-                '-' + date.getDate() + ' ' +
-             date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        return date.getFullYear() + '-' + checkTime(date.getMonth() + 1) +
+                '-' + checkTime(date.getDate()) + ' ' +
+          checkTime(date.getHours()) + ":" + checkTime(date.getMinutes()) + ":" + checkTime(date.getSeconds());
     },
     //封装pagination公共机制
     pagination(data,callback){
