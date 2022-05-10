@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@master
       - name: Install and Build
         run: |
-          npm install
+          yarn add install
           npm run build
       # 发布到 GitHub Pages
       - name: Deploy
