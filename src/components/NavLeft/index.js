@@ -1,23 +1,24 @@
+// src/components/NavLeft/index.js
 import React from "react";
 import MenuConfig from "./../../config/menuConfig"; //导入menuConfig这个文件
-import { Menu, Icon } from "antd"; //导入子组件菜单
-import { NavLink } from "react-router-dom";
+import {Menu, Icon} from "antd"; //导入子组件菜单
+import {NavLink} from "react-router-dom";
 import "./index.less";
-import { connect } from "react-redux"; // 连接器
-import { switchMenu } from "./../../redux/action"; //事件行为
+import {connect} from "react-redux"; // 连接器
+import {switchMenu} from "./../../redux/action"; //事件行为
 
 const SubMenu = Menu.SubMenu;
+
 class NavLeft extends React.Component {
   state = {
     currentKey: ""
   };
-  handleClick = ({ item, key }) => {
-    // console.log(item)
+  handleClick = ({item, key}) => {
     if (key === this.state.currentKey) {
       return false;
     }
     // 事件派发，自动调用reducer，通过reducer保存到store对象中
-    const { dispatch } = this.props;
+    const {dispatch} = this.props;
     dispatch(switchMenu(item.props.title));
     this.setState({
       currentKey: key
@@ -38,6 +39,14 @@ class NavLeft extends React.Component {
       menuTreeNode
     });
   }
+
+  homeHandleClick = () => {
+    const {dispatch} = this.props;
+    dispatch(switchMenu('首页'));
+    this.setState({
+      currentKey: ""
+    });
+  };
 
   //菜单渲染
   renderMenu = data => {
@@ -64,10 +73,12 @@ class NavLeft extends React.Component {
     // }
     return (
       <div>
-        <div className="logo">
-          <img src="/assets/logo-ant.svg" alt=" " />
-          <h1>Imooc MS</h1>
-        </div>
+        <NavLink to="/home" onClick={this.homeHandleClick}>
+          <div className="logo">
+            <img src="/assets/logo-ant.svg" alt=""/>
+            <h1>Imooc MS</h1>
+          </div>
+        </NavLink>
         <Menu
           onClick={this.handleClick}
           selectedKeys={[this.state.currentKey]}
@@ -79,4 +90,5 @@ class NavLeft extends React.Component {
     );
   }
 }
+
 export default connect()(NavLeft);

@@ -18,7 +18,7 @@ class Login extends React.Component {
     // 事件派发，自动调用reducer，通过reducer讲用户名保存到store对象中
     const { dispatch } = this.props;
     dispatch(switchUsers(params.username));
-    window.location.href = "/#/";
+    window.location.href = "/#/home";
   };
 
   render() {

@@ -1,0 +1,122 @@
+@import '../../style/default.less';
+.login-page{
+    .footer{
+        //padding-top:40px;
+        position:fixed;
+        bottom:0;
+        left:0;
+        width:100%;
+        height:60px;
+        padding-top:20px;
+        background:rgba(21,23,20, .5);
+        font-size:12px;
+        letter-spacing: 0.15em;
+    }
+    .ant-form-item{
+        //margin-bottom:20px;
+    }
+    .ant-input-lg,
+    .ant-btn-lg{
+        height:40px;
+        font-size:@fontD;
+    }
+    .login-form-button{
+        width:100%;
+        margin-top:15px;
+    }
+}
+.login-header{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:80px;
+    line-height: 80px;
+    background:rgba(21,20,13, .9);
+    .logo{
+        padding-left: 100px;
+        font-size: 20px;
+        color: white;
+    }
+    img{
+        height:40px;
+        margin-right: 15px;
+    }
+}
+.login-content-wrap{
+    min-height:550px;
+    //height:calc(~'100vh - 100px');
+    height:calc(~'100vh');
+    background:url(https://media.xiaohuali.com/ebike-fc/login/banner.jpg) no-repeat center;
+    background-size:cover;
+}
+.login-content{
+    position:relative;
+    top:50%;
+    display:flex;
+    max-width:960px;
+    margin:0 auto;
+    padding:0 20px;
+    transform:translateY(-50%);
+    align-items:center;
+    justify-content: center;
+
+    .word{
+        flex:7;
+        line-height:1.4;
+        color:#fff;
+        font-size:64px;
+        font-weight:bold;
+    }
+}
+.login-box{
+    position:relative;
+    flex:4;
+    height:370px;
+    padding:40px 30px 0 30px;
+    background:#fff;
+    overflow:hidden;
+    .title{
+        line-height:1;
+        margin-bottom:50px;
+        font-size:40px;
+        color:@colorC;
+        font-weight:bold;
+        text-align:center;
+    }
+    .error-msg-wrap{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+
+        div{
+            visibility: hidden;
+            height:30px;
+            line-height:30px;
+            background:#f60c1a;
+            color:@colorM;
+            font-size:@fontD;
+            text-align:center;
+            transform:translateY(-30px);
+            transition: all .3s ease-out;
+
+            &.show{
+                visibility:visible;
+                transform:translateY(0);
+                transition: all .3s ease-out;
+            }
+        }
+    }
+}
+@media screen and (max-width: 1200px){
+    .login-header{
+        padding-left:30px;
+        padding-right:30px;
+    }
+    .login-content{
+        .word{
+            font-size:48px;
+        }
+    }
+}
