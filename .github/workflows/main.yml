@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - master
-	pull_request:
-  	branches:
-    	- master
 
 jobs:
   build-and-deploy:
@@ -14,7 +11,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
-
+        
 	  # 安装依赖 & 运行测试并生成覆盖率报告 & 项目打包
       - name: Install and Build
         run: |
